@@ -116,11 +116,11 @@ wintagtool.exe "--count-audio-channels" "audio.mp3"
 
 ## Documentation
 
-See `MANUAL.md` for the complete command reference, exit codes, PictureType values, supported audio file formats, and known limitations.
+See [`MANUAL.md`](MANUAL.md) for the complete command reference, exit codes, PictureType values, supported audio file formats, and known limitations.
 
 ## License
 
-See the `LICENSE` file for license information.
+See the [`LICENSE`](LICENSE) file for license information.
 
 ## Credits
 
