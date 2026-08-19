@@ -130,7 +130,7 @@ Special thanks to the TagLib developers for providing a high-quality, cross-plat
 
 ## Release
 
-Contents of release:
+Contents of [release](../../releases):
 
 ```text
 WinTagTool-1.x.x-Windows-x64.zip
