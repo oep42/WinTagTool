@@ -1,4 +1,4 @@
-﻿# WinTagTool Manual
+# WinTagTool Manual
 
 ## Introduction
 
@@ -144,7 +144,7 @@ If the specified tag does not exist, the output of this command is `0`.
 
 This command outputs a number if the operation is supported for the specified audio file.
 
-This command is not supported for WMA files and returns exit code 20 for that format.
+This command does not support WMA files and returns exit code 20 for that format.
 
 For example, if the file contains:
 
@@ -179,7 +179,7 @@ wintagtool.exe "--count-all-tags" "audio.mp3"
 
 Outputs the total number of distinct tag names.
 
-This command is not supported for WMA files and returns exit code 20 for that format.
+This command does not support WMA files and returns exit code 20 for that format.
 
 The number of tag values is not counted. For example, if the file contains:
 
@@ -212,7 +212,7 @@ wintagtool.exe "--count-all-tag-values" "audio.mp3"
 
 Outputs the total number of tag values.
 
-This command is not supported for WMA files and returns exit code 20 for that format.
+This command does not support WMA files and returns exit code 20 for that format.
 
 For example, if the file contains:
 
@@ -344,6 +344,8 @@ If `<picture description>` is not specified, an empty description is used.
 
 For `<picture description>`, any text string can be used.
 
+This command has limited support for APE, M4A, WMA, and WV files. (See support matrix below for details about this limited support.)
+
 Regarding `<image file>`: This command does not support image paths or filenames containing the `=` character. Such paths/filenames return exit code 7.
 
 ### Append picture
@@ -382,6 +384,8 @@ If `<picture description>` is not specified, an empty description is used.
 
 For `<picture description>`, any text string can be used.
 
+This command does not support APE or WV files. It has limited support for M4A and WMA files. (See support matrix below for details about this limited support.)
+
 Regarding `<image file>`: This command does not support image paths or filenames containing the `=` character. Such paths/filenames return exit code 15.
 
 ### Export a picture
@@ -402,7 +406,7 @@ In addition, the output filename is written to the standard output.
 
 **Note:** The `<picture base filename>` is usually a path with a filename without an extension.
 
-This command is not supported for APE and WV files and returns exit code 20 for those formats.
+This command does not support APE or WV files and returns exit code 20 for those formats.
 
 ### Remove all pictures
 
@@ -418,6 +422,8 @@ wintagtool.exe "--remove-pictures" "audio.mp3"
 
 Removes every embedded picture stored in the audio file.
 
+This command has limited support for APE and WV files. (See support matrix below for details about this limited support.)
+
 ### Count pictures
 
 ```text
@@ -432,7 +438,7 @@ wintagtool.exe "--count-pictures" "audio.mp3"
 
 Outputs the number of embedded pictures.
 
-This command is not supported for APE and WV files and returns exit code 20 for those formats.
+This command does not support APE or WV files and returns exit code 20 for those formats.
 
 ### Has picture
 
@@ -462,7 +468,7 @@ Checks whether a picture exists. Outputs `true` if an embedded picture exists at
 
 An invalid picture index does not produce an error; it produces `false`.
 
-This command is not supported for APE and WV files and returns exit code 20 for those formats.
+This command does not support APE or WV files and returns exit code 20 for those formats.
 
 ### Get picture type
 
@@ -484,7 +490,7 @@ If no embedded pictures are present, the command returns exit code 12.
 
 If the specified picture index is out of range, the command returns exit code 13.
 
-This command is not supported for APE, M4A, and WV files and returns exit code 20 for those formats.
+This command does not support APE, M4A, or WV files and returns exit code 20 for those formats.
 
 ### Get picture description
 
@@ -506,7 +512,7 @@ If no embedded pictures are present, the command returns exit code 12.
 
 If the specified picture index is out of range, the command returns exit code 13.
 
-This command is not supported for APE, M4A, and WV files and returns exit code 20 for those formats.
+This command does not support APE, M4A, or WV files and returns exit code 20 for those formats.
 
 ### Get picture MIME type
 
@@ -528,7 +534,7 @@ If no embedded pictures are present, the command returns exit code 12.
 
 If the specified picture index is out of range, the command returns exit code 13.
 
-This command is not supported for APE, M4A, and WV files and returns exit code 20 for those formats.
+This command does not support APE, M4A, or WV files and returns exit code 20 for those formats.
 
 ### Get picture size
 
@@ -550,7 +556,7 @@ If no embedded pictures are present, the command returns exit code 12.
 
 If the specified picture index is out of range, the command returns exit code 13.
 
-This command is not supported for APE and WV files and returns exit code 20 for those formats.
+This command does not support APE or WV files and returns exit code 20 for those formats.
 
 ### Get picture width
 
@@ -574,7 +580,7 @@ If the specified picture index is out of range, the command returns exit code 13
 
 Supported picture types: JPG, JPEG, JFIF, PNG, and WEBP.
 
-This command is not supported for APE, M4A, WMA, and WV files and returns exit code 20 for those formats.
+This command does not support APE, M4A, WMA, or WV files and returns exit code 20 for those formats.
 
 ### Get picture height
 
@@ -598,7 +604,7 @@ If the specified picture index is out of range, the command returns exit code 13
 
 Supported picture types: JPG, JPEG, JFIF, PNG, and WEBP.
 
-This command is not supported for APE, M4A, WMA, and WV files and returns exit code 20 for those formats.
+This command does not support APE, M4A, WMA, or WV files and returns exit code 20 for those formats.
 
 ## AUDIO PROPERTIES
 
@@ -799,6 +805,7 @@ The following limitations were established through testing of the current WinTag
 Not supported:
 
 ```text
+--append-picture-from
 --export-picture
 --count-pictures
 --has-picture
@@ -810,7 +817,12 @@ Not supported:
 --get-picture-height
 ```
 
-Tests showed limitations when attempting to append multiple pictures. The exact maximum number of pictures supported by APE has not been established.
+Limited support (see support matrix below for details):
+
+```text
+--import-picture-from
+--remove-pictures
+```
 
 ### M4A
 
@@ -824,7 +836,14 @@ Not supported:
 --get-picture-height
 ```
 
-Tests showed that pictures can be added, but picture-type and picture-description handling is format-dependent. In the tested files, the first picture was stored as Front Cover, while subsequent pictures were stored as Other. Picture descriptions were not preserved in the tested configuration.
+Limited support (see support matrix below for details):
+
+```text
+--import-picture-from
+--append-picture-from
+```
+
+Pictures can be added with `--import-picture-from` and `--append-picture-from`, but setting PictureType and PictureDescription is not supported. The first picture is always displayed in Mp3tag with PictureType "Front Cover", while subsequent pictures are always displayed in Mp3tag with PictureType "Other". Picture descriptions are not preserved.
 
 ### WMA
 
@@ -838,11 +857,19 @@ Not supported:
 --get-picture-height
 ```
 
+Limited support (see support matrix below for details):
+
+```text
+--import-picture-from
+--append-picture-from
+```
+
 ### WV
 
 Not supported:
 
 ```text
+--append-picture-from
 --export-picture
 --count-pictures
 --has-picture
@@ -854,11 +881,16 @@ Not supported:
 --get-picture-height
 ```
 
-Tests showed that the first picture uses Front Cover as its picture type and that only one picture could be added in the tested configuration.
+Limited support (see support matrix below for details):
+
+```text
+--import-picture-from
+--remove-pictures
+```
 
 ## Support matrix
 
-Key: ✓ = supported, ✗ = not supported.
+Key: ✓ = supported, ✗ = not supported, ✗/✓ = limited support.
 
 ### Metadata tags
 
@@ -877,20 +909,20 @@ Key: ✓ = supported, ✗ = not supported.
 
 ### Embedded pictures
 
-| Command                     | AIFF/AIF | APE | FLAC | M4A | MP3 | OGG | OPUS | WMA | WV  |
-| --------------------------- |:--------:|:---:|:----:|:---:|:---:|:---:|:----:|:---:|:---:|
-| `--import-picture-from`     | ✓        | ✓   | ✓    | ✓   | ✓   | ✓   | ✓    | ✓   | ✓   |
-| `--append-picture-from`     | ✓        | ✓   | ✓    | ✓   | ✓   | ✓   | ✓    | ✓   | ✓   |
-| `--export-picture`          | ✓        | ✗   | ✓    | ✓   | ✓   | ✓   | ✓    | ✓   | ✗   |
-| `--remove-pictures`         | ✓        | ✓   | ✓    | ✓   | ✓   | ✓   | ✓    | ✓   | ✓   |
-| `--count-pictures`          | ✓        | ✗   | ✓    | ✓   | ✓   | ✓   | ✓    | ✓   | ✗   |
-| `--has-picture`             | ✓        | ✗   | ✓    | ✓   | ✓   | ✓   | ✓    | ✓   | ✗   |
-| `--get-picture-type`        | ✓        | ✗   | ✓    | ✗   | ✓   | ✓   | ✓    | ✓   | ✗   |
-| `--get-picture-description` | ✓        | ✗   | ✓    | ✗   | ✓   | ✓   | ✓    | ✓   | ✗   |
-| `--get-picture-mime-type`   | ✓        | ✗   | ✓    | ✗   | ✓   | ✓   | ✓    | ✓   | ✗   |
-| `--get-picture-size`        | ✓        | ✗   | ✓    | ✓   | ✓   | ✓   | ✓    | ✓   | ✗   |
-| `--get-picture-width`       | ✓        | ✗   | ✓    | ✗   | ✓   | ✓   | ✓    | ✗   | ✗   |
-| `--get-picture-height`      | ✓        | ✗   | ✓    | ✗   | ✓   | ✓   | ✓    | ✗   | ✗   |
+| Command                     | AIFF/AIF | APE  | FLAC | M4A  | MP3 | OGG | OPUS | WMA  | WV   |
+| --------------------------- |:--------:|:----:|:----:|:----:|:---:|:---:|:----:|:----:|:----:|
+| `--import-picture-from`     | ✓        | ✗/✓¹ | ✓    | ✗/✓² | ✓   | ✓   | ✓    | ✗/✓¹ | ✗/✓¹ |
+| `--append-picture-from`     | ✓        | ✗    | ✓    | ✗/✓² | ✓   | ✓   | ✓    | ✗/✓¹ | ✗    |
+| `--export-picture`          | ✓        | ✗    | ✓    | ✓    | ✓   | ✓   | ✓    | ✓    | ✗    |
+| `--remove-pictures`         | ✓        | ✗/✓¹ | ✓    | ✓    | ✓   | ✓   | ✓    | ✓    | ✗/✓¹ |
+| `--count-pictures`          | ✓        | ✗    | ✓    | ✓    | ✓   | ✓   | ✓    | ✓    | ✗    |
+| `--has-picture`             | ✓        | ✗    | ✓    | ✓    | ✓   | ✓   | ✓    | ✓    | ✗    |
+| `--get-picture-type`        | ✓        | ✗    | ✓    | ✗    | ✓   | ✓   | ✓    | ✓    | ✗    |
+| `--get-picture-description` | ✓        | ✗    | ✓    | ✗    | ✓   | ✓   | ✓    | ✓    | ✗    |
+| `--get-picture-mime-type`   | ✓        | ✗    | ✓    | ✗    | ✓   | ✓   | ✓    | ✓    | ✗    |
+| `--get-picture-size`        | ✓        | ✗    | ✓    | ✓    | ✓   | ✓   | ✓    | ✓    | ✗    |
+| `--get-picture-width`       | ✓        | ✗    | ✓    | ✗    | ✓   | ✓   | ✓    | ✗    | ✗    |
+| `--get-picture-height`      | ✓        | ✗    | ✓    | ✗    | ✓   | ✓   | ✓    | ✗    | ✗    |
 
 ### Audio properties
 
@@ -900,6 +932,10 @@ Key: ✓ = supported, ✗ = not supported.
 | `--get-audio-bitrate`    | ✓        | ✓   | ✓    | ✓   | ✓   | ✓   | ✓    | ✓   | ✓   |
 | `--get-audio-samplerate` | ✓        | ✓   | ✓    | ✓   | ✓   | ✓   | ✓    | ✓   | ✓   |
 | `--count-audio-channels` | ✓        | ✓   | ✓    | ✓   | ✓   | ✓   | ✓    | ✓   | ✓   |
+
+¹ Only supported when one or no pictures are already embedded.
+
+² PictureType and PictureDescription are not supported. Supported: `--import-picture-from=ImageFile` and `--append-picture-from=ImageFile`. Not supported: `--import-picture-from=ImageFile=PictureType`, `--import-picture-from=ImageFile=PictureType=PictureDescription`, `--append-picture-from=ImageFile=PictureType`, and `--append-picture-from=ImageFile=PictureType=PictureDescription`. Note that these four commands with PictureType and PictureDescription can be used, but will always result in the value `Null` for PictureType and PictureDescription.
 
 ## Tested audio file formats
 
