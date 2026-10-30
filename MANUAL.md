@@ -935,7 +935,7 @@ Key: ✓ = supported, ✗ = not supported, ✗/✓ = limited support.
 
 ¹ Only supported when one or no pictures are already embedded.
 
-² PictureType and PictureDescription are not supported. Supported: `--import-picture-from=ImageFile` and `--append-picture-from=ImageFile`. Not supported: `--import-picture-from=ImageFile=PictureType`, `--import-picture-from=ImageFile=PictureType=PictureDescription`, `--append-picture-from=ImageFile=PictureType`, and `--append-picture-from=ImageFile=PictureType=PictureDescription`. Note that these four commands with PictureType and PictureDescription can be used, but will always result in the value `Null` for PictureType and PictureDescription.
+² PictureType and PictureDescription are not supported. Supported: `--import-picture-from=ImageFile` and `--append-picture-from=ImageFile`. Not supported: `--import-picture-from=ImageFile=PictureType`, `--import-picture-from=ImageFile=PictureType=PictureDescription`, `--append-picture-from=ImageFile=PictureType`, and `--append-picture-from=ImageFile=PictureType=PictureDescription`. Note that these four commands with PictureType or PictureDescription can be used, but will always result in the value `Null` for PictureType and PictureDescription.
 
 ## Tested audio file formats
 
